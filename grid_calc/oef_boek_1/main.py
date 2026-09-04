@@ -61,25 +61,16 @@ def create_grid():
     # MOTOR
     # as asynchronous motor for short-circuit calculations
     # --------------------------------------------------
-    P_mech = 2.0
-    eta = 0.95
-    cosphi = 0.85
-
-    P_motor = P_mech / eta
-
-    import math
-    phi = math.acos(cosphi)
-    Q_motor = P_motor * math.tan(phi)
-    S_motor = P_motor / cosphi
-
-    pp.create_sgen(
+    pp.create_motor(
         net,
         bus=k3,
-        p_mw=-P_motor,
-        q_mvar=-Q_motor,
-        sn_mva=S_motor,
-        type="motor",
-        k=5.0,
+        pn_mech_mw=2.0,
+        cos_phi=0.85,
+        efficiency_percent=95.0,
+        vn_kv=10.0,
+        cos_phi_n=0.85,
+        efficiency_n_percent=95.0,
+        lrc_pu=5.0,
         rx=0.1,
         name="Motor"
     )
